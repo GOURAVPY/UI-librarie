@@ -38,5 +38,22 @@ export function ScrambleText({
   // Starts as the real text so it is readable before JavaScript runs.
   const [display, setDisplay] = useState(text);
 
+  useEffect(() => {
+    const letters = Array.from(text);
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    // With reduced motion the first tick shows the final text and stops.
+    let tick = reduceMotion ? letters.length * TICKS_PER_CHARACTER : 0;
+
+    const timer = window.setInterval(() => {
+      const settled = Math.floor(tick / TICKS_PER_CHARACTER);
+      setDisplay(scramble(letters, settled, characters));
+      if (settled >= letters.length) window.clearInterval(timer);
+      tick += 1;
+    }, speed);
+    return () => window.clearInterval(timer);
+  }, [text, speed, characters]);
+
   return <span className={className}>{display}</span>;
 }
