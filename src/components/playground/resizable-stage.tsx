@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useRef, type PointerEvent, type ReactNode } from "react";
 
 const MIN_WIDTH = 280;
 /** Pixels the width changes per arrow-key press. */
@@ -19,6 +19,19 @@ export function ResizableStage({
   children,
 }: ResizableStageProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+
+  /** Keeps a width between the minimum and the space available. */
+  function clamp(next: number): number {
+    const max = trackRef.current?.clientWidth ?? next;
+    return Math.round(Math.min(Math.max(next, MIN_WIDTH), max));
+  }
+
+  function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
+    // Only resize while this handle holds the pointer (a drag in progress).
+    if (!event.currentTarget.hasPointerCapture(event.pointerId)) return;
+    const left = trackRef.current?.getBoundingClientRect().left ?? 0;
+    onWidthChange(clamp(event.clientX - left));
+  }
 
   return (
     <div
