@@ -1,6 +1,11 @@
 "use client";
 
-import { useRef, type PointerEvent, type ReactNode } from "react";
+import {
+  useRef,
+  type KeyboardEvent,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
 
 const MIN_WIDTH = 280;
 /** Pixels the width changes per arrow-key press. */
@@ -31,6 +36,14 @@ export function ResizableStage({
     if (!event.currentTarget.hasPointerCapture(event.pointerId)) return;
     const left = trackRef.current?.getBoundingClientRect().left ?? 0;
     onWidthChange(clamp(event.clientX - left));
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const current = width ?? trackRef.current?.clientWidth ?? MIN_WIDTH;
+    const change = event.key === "ArrowLeft" ? -KEY_STEP : KEY_STEP;
+    onWidthChange(clamp(current + change));
   }
 
   return (
