@@ -29,6 +29,20 @@ export function Features() {
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
       <h2 className="text-3xl font-semibold tracking-tight">What&apos;s inside</h2>
+      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((feature, index) => (
+          <li
+            key={feature.title}
+            className="rounded-xl border border-border bg-surface p-6"
+          >
+            <span className="font-mono text-sm text-accent">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 className="mt-3 font-medium">{feature.title}</h3>
+            <p className="mt-1 text-sm text-muted">{feature.body}</p>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
