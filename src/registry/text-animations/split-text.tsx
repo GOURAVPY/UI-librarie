@@ -20,3 +20,13 @@ export interface SplitTextProps {
 function toPieces(word: string, by: "letter" | "word"): string[] {
   return by === "word" ? [word] : Array.from(word);
 }
+
+export function SplitText({
+  text,
+  by = "letter",
+  stagger = 0.04,
+  duration = 0.5,
+  className,
+}: SplitTextProps) {
+  return <span className={className}>{text}</span>;
+}
