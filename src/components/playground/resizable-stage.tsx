@@ -24,6 +24,7 @@ export function ResizableStage({
   children,
 }: ResizableStageProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const label = width === null ? "Full width" : `${width}px`;
 
   /** Keeps a width between the minimum and the space available. */
   function clamp(next: number): number {
@@ -56,6 +57,25 @@ export function ResizableStage({
         className="relative flex min-h-80 max-w-full items-center justify-center border-r border-border bg-background p-6 pr-8 text-center"
       >
         {children}
+        <span className="absolute bottom-2 left-1/2 -translate-x-1/2 font-mono text-xs text-muted">
+          {label}
+        </span>
+        <div
+          role="slider"
+          tabIndex={0}
+          aria-label="Preview width"
+          aria-valuemin={MIN_WIDTH}
+          aria-valuenow={width ?? MIN_WIDTH}
+          aria-valuetext={label}
+          onPointerDown={(event) =>
+            event.currentTarget.setPointerCapture(event.pointerId)
+          }
+          onPointerMove={handlePointerMove}
+          onKeyDown={handleKeyDown}
+          className="absolute inset-y-0 right-0 flex w-4 cursor-ew-resize touch-none items-center justify-center"
+        >
+          <span aria-hidden="true" className="h-10 w-1 rounded-full bg-muted" />
+        </div>
       </div>
     </div>
   );
