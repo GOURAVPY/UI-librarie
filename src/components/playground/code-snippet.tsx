@@ -24,6 +24,23 @@ export function CodeSnippet({
         <span className="text-sm font-medium">{label}</span>
         <CopyButton text={code} label={label} />
       </div>
+      <div className={`relative ${expanded ? "" : "max-h-72 overflow-hidden"}`}>
+        <pre className="overflow-x-auto p-4 font-mono text-sm leading-relaxed">
+          <code>
+            {lines.map((line, index) => (
+              <span key={index} className="block">
+                <span
+                  aria-hidden="true"
+                  className="mr-4 inline-block w-6 select-none text-right text-muted"
+                >
+                  {index + 1}
+                </span>
+                {line}
+              </span>
+            ))}
+          </code>
+        </pre>
+      </div>
     </div>
   );
 }
