@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { CodeBlock } from "@/components/code-block";
+import { Playground } from "@/components/playground/playground";
 import { PreviewTabs } from "@/components/preview-tabs";
 import { StatusBadge } from "@/components/status-badge";
 import {
@@ -47,7 +48,6 @@ async function ComponentContent({ params }: Pick<Props, "params">) {
   const { item, category } = entry;
   const { previous, next } = neighbours(slug);
   const built = registry[slug];
-  const Preview = built?.Preview;
   const code = built
     ? await readRegistrySource(built.file)
     : `// The source for ${item.name} will appear here once it is built.`;
@@ -62,18 +62,20 @@ async function ComponentContent({ params }: Pick<Props, "params">) {
       <p className="mt-2 max-w-2xl text-muted">{item.description}</p>
 
       <div className="mt-8">
-        <PreviewTabs
-          preview={
-            Preview ? (
-              <div className="preview-stage flex min-h-80 items-center justify-center rounded-lg border border-border p-6 text-center">
-                <Preview />
-              </div>
-            ) : (
-              <PreviewPlaceholder item={item} />
-            )
-          }
-          code={<CodeBlock label={`${item.slug}.tsx`} code={code} />}
-        />
+        {built ? (
+          <Playground
+            slug={item.slug}
+            name={item.name}
+            source={code}
+            installCommand={installCommand(item.slug)}
+            dependencies={built.dependencies}
+          />
+        ) : (
+          <PreviewTabs
+            preview={<PreviewPlaceholder item={item} />}
+            code={<CodeBlock label={`${item.slug}.tsx`} code={code} />}
+          />
+        )}
       </div>
 
       <section className="mt-10">
