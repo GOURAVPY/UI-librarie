@@ -96,6 +96,18 @@ export function CustomizePanel({
           Reset
         </button>
       </div>
+      <div className="grid gap-2 sm:grid-cols-2">
+        {controls.map((control) => {
+          const shared = { value: values[control.name], onChange };
+          if (control.kind === "range") {
+            return <RangeField key={control.name} control={control} {...shared} />;
+          }
+          if (control.kind === "select") {
+            return <SelectField key={control.name} control={control} {...shared} />;
+          }
+          return <TextField key={control.name} control={control} {...shared} />;
+        })}
+      </div>
     </section>
   );
 }
