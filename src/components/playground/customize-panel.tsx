@@ -1,6 +1,12 @@
 "use client";
 
-import type { Control, ControlValue, ControlValues } from "@/registry/demos";
+import type {
+  Control,
+  ControlValue,
+  ControlValues,
+  RangeControl,
+  SelectControl,
+} from "@/registry/demos";
 
 interface CustomizePanelProps {
   controls: readonly Control[];
@@ -28,6 +34,27 @@ function TextField({ control, value, onChange }: FieldProps<Control>) {
         onChange={(event) => onChange(control.name, event.target.value)}
         className="min-w-0 flex-1 rounded border border-border bg-background px-2 py-1 text-right"
       />
+    </label>
+  );
+}
+
+function RangeField({ control, value, onChange }: FieldProps<RangeControl>) {
+  return (
+    <label className={ROW_CLASS}>
+      <span className="text-muted">{control.label}</span>
+      <input
+        type="range"
+        min={control.min}
+        max={control.max}
+        step={control.step}
+        value={Number(value)}
+        onChange={(event) => onChange(control.name, Number(event.target.value))}
+        className="min-w-0 flex-1 accent-accent"
+      />
+      <span className="w-14 text-right font-mono text-xs">
+        {value}
+        {control.unit}
+      </span>
     </label>
   );
 }
