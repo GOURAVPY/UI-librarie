@@ -21,9 +21,12 @@ function nextTab(key: string, active: TabKey): TabKey | undefined {
 export function PreviewTabs({
   preview,
   code,
+  actions,
 }: {
   preview: ReactNode;
   code: ReactNode;
+  /** Optional buttons shown to the right of the tabs. */
+  actions?: ReactNode;
 }) {
   const [active, setActive] = useState<TabKey>("preview");
   const baseId = useId();
@@ -38,34 +41,39 @@ export function PreviewTabs({
 
   return (
     <div>
-      <div
-        role="tablist"
-        aria-label="Component view"
-        onKeyDown={handleKeyDown}
-        className="mb-3 inline-flex rounded-lg border border-border bg-surface p-1 text-sm"
-      >
-        {tabs.map((tab) => {
-          const selected = tab.key === active;
-          return (
-            <button
-              key={tab.key}
-              id={`${baseId}-tab-${tab.key}`}
-              type="button"
-              role="tab"
-              aria-selected={selected}
-              aria-controls={`${baseId}-panel-${tab.key}`}
-              tabIndex={selected ? 0 : -1}
-              onClick={() => setActive(tab.key)}
-              className={
-                selected
-                  ? "rounded-md bg-surface-raised px-4 py-1.5 font-medium text-foreground"
-                  : "rounded-md px-4 py-1.5 text-muted transition-colors hover:text-foreground"
-              }
-            >
-              {tab.label}
-            </button>
-          );
-        })}
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+        <div
+          role="tablist"
+          aria-label="Component view"
+          onKeyDown={handleKeyDown}
+          className="inline-flex rounded-lg border border-border bg-surface p-1 text-sm"
+        >
+          {tabs.map((tab) => {
+            const selected = tab.key === active;
+            return (
+              <button
+                key={tab.key}
+                id={`${baseId}-tab-${tab.key}`}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                aria-controls={`${baseId}-panel-${tab.key}`}
+                tabIndex={selected ? 0 : -1}
+                onClick={() => setActive(tab.key)}
+                className={
+                  selected
+                    ? "rounded-md bg-surface-raised px-4 py-1.5 font-medium text-foreground"
+                    : "rounded-md px-4 py-1.5 text-muted transition-colors hover:text-foreground"
+                }
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+        {actions ? (
+          <div className="flex items-center gap-2">{actions}</div>
+        ) : null}
       </div>
       <div
         id={`${baseId}-panel-preview`}
