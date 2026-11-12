@@ -63,13 +63,16 @@ async function ComponentContent({ params }: Pick<Props, "params">) {
 
       <div className="mt-8">
         <PreviewTabs
-          preview={<PreviewPlaceholder item={item} />}
-          code={
-            <CodeBlock
-              label={`${item.slug}.tsx`}
-              code={`// The source for ${item.name} will appear here once it is built.`}
-            />
+          preview={
+            Preview ? (
+              <div className="preview-stage flex min-h-80 items-center justify-center rounded-lg border border-border p-6 text-center">
+                <Preview />
+              </div>
+            ) : (
+              <PreviewPlaceholder item={item} />
+            )
           }
+          code={<CodeBlock label={`${item.slug}.tsx`} code={code} />}
         />
       </div>
 
