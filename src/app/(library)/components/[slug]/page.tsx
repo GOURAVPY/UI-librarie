@@ -69,6 +69,8 @@ async function ComponentContent({ params }: Pick<Props, "params">) {
       <div className="mt-8">
         {built ? (
           <Playground
+            // A new key resets the controls when moving between components.
+            key={item.slug}
             slug={item.slug}
             name={item.name}
             source={code}
