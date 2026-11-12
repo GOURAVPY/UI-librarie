@@ -59,6 +59,25 @@ function RangeField({ control, value, onChange }: FieldProps<RangeControl>) {
   );
 }
 
+function SelectField({ control, value, onChange }: FieldProps<SelectControl>) {
+  return (
+    <label className={ROW_CLASS}>
+      <span className="text-muted">{control.label}</span>
+      <select
+        value={String(value)}
+        onChange={(event) => onChange(control.name, event.target.value)}
+        className="rounded border border-border bg-background px-2 py-1"
+      >
+        {control.options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
 export function CustomizePanel({
   controls,
   values,
