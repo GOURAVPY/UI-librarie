@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { allEntries, catalog, componentHref } from "@/lib/catalog";
+import { ClosingBanner } from "@/components/home/cta";
+import { Faq } from "@/components/home/faq";
 import { Features } from "@/components/home/features";
 import { Hero } from "@/components/home/hero";
+import { InstallSection } from "@/components/home/install";
 import { Showcase } from "@/components/home/showcase";
 
 export default function HomePage() {
@@ -15,7 +18,7 @@ export default function HomePage() {
         <div className="flex items-end justify-between gap-4">
           <h2 className="text-2xl font-semibold tracking-tight">Categories</h2>
           <p className="text-sm text-muted">
-            {allEntries.length} components planned
+            {allEntries.length} components, ready and planned
           </p>
         </div>
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -41,6 +44,10 @@ export default function HomePage() {
           })}
         </ul>
       </section>
+
+      <InstallSection />
+      <Faq />
+      <ClosingBanner />
     </main>
   );
 }
