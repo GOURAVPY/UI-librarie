@@ -7,6 +7,14 @@ const features = [
     title: "One-command install",
     body: "Add any component with the shadcn CLI, or copy it straight from the Code tab.",
   },
+  {
+    title: "Respects reduced motion",
+    body: "Every component checks the visitor's motion setting and shows the final state without animating.",
+  },
+  {
+    title: "Screen-reader friendly",
+    body: "Animated text is hidden from assistive technology, which reads the plain text instead.",
+  },
 ] as const;
 
 export function Features() {
