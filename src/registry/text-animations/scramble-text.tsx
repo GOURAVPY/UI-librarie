@@ -55,5 +55,11 @@ export function ScrambleText({
     return () => window.clearInterval(timer);
   }, [text, speed, characters]);
 
-  return <span className={className}>{display}</span>;
+  return (
+    <span className={className}>
+      {/* Screen readers get the real text, not the shuffling characters. */}
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{display}</span>
+    </span>
+  );
 }
