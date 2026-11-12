@@ -11,4 +11,7 @@ export interface ScrambleTextProps {
   text: string;
   /** Milliseconds between shuffles. */
   speed?: number;
+  /** The characters to shuffle through. */
+  characters?: string;
+  className?: string;
 }
