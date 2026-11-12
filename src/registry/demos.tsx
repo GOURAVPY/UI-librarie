@@ -1,6 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { GradientText } from "./text-animations/gradient-text";
+import { ScrambleText } from "./text-animations/scramble-text";
 import { SplitText } from "./text-animations/split-text";
 
 export type ControlValue = string | number;
@@ -79,4 +81,47 @@ const splitText: Demo = {
   stagger={${values.stagger}}
   duration={${values.duration}}
 />`,
+};
+
+const gradientText: Demo = {
+  playsOnce: false,
+  controls: [
+    { kind: "text", name: "text", label: "Text", initial: "Colour that keeps moving" },
+    { kind: "range", name: "duration", label: "Duration", initial: 4, min: 1, max: 12, step: 0.5, unit: "s" },
+  ],
+  render: (values) => (
+    <GradientText duration={Number(values.duration)} className={HEADING_CLASS}>
+      {String(values.text)}
+    </GradientText>
+  ),
+  usage: (values) => `import { GradientText } from "@/components/ui/gradient-text";
+
+<GradientText duration={${values.duration}}>
+  ${values.text}
+</GradientText>`,
+};
+
+const scrambleText: Demo = {
+  playsOnce: true,
+  controls: [
+    { kind: "text", name: "text", label: "Text", initial: "DECODING THE MESSAGE" },
+    { kind: "range", name: "speed", label: "Speed", initial: 40, min: 10, max: 150, step: 5, unit: "ms" },
+  ],
+  render: (values) => (
+    <ScrambleText
+      text={String(values.text)}
+      speed={Number(values.speed)}
+      className="font-mono text-2xl font-semibold sm:text-4xl"
+    />
+  ),
+  usage: (values) => `import { ScrambleText } from "@/components/ui/scramble-text";
+
+<ScrambleText text=${JSON.stringify(values.text)} speed={${values.speed}} />`,
+};
+
+/** Interactive demos, keyed by catalog slug. */
+export const demos: Readonly<Record<string, Demo>> = {
+  "split-text": splitText,
+  "gradient-text": gradientText,
+  "scramble-text": scrambleText,
 };
