@@ -21,6 +21,15 @@ export function InstallSection() {
             Installation guide
           </Link>
         </div>
+        <div className="flex flex-col gap-4">
+          <Window title="Terminal">
+            <p className="break-all">
+              <span className="text-accent">$</span>{" "}
+              {installCommand("scramble-text")}
+            </p>
+            <p className="mt-2 text-muted">✓ Added scramble-text.tsx</p>
+          </Window>
+        </div>
       </div>
     </section>
   );
