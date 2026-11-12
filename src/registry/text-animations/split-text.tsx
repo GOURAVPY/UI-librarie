@@ -39,7 +39,14 @@ export function SplitText({
     <span className={className}>
       {/* Screen readers get the plain text; the animated pieces are hidden. */}
       <span className="sr-only">{text}</span>
-      <span aria-hidden="true">{text}</span>
+      <span aria-hidden="true">
+        {words.map((pieces, wordIndex) => (
+          <span key={wordIndex} className="inline-block whitespace-nowrap">
+            {pieces.join("")}
+            {wordIndex < words.length - 1 ? " " : null}
+          </span>
+        ))}
+      </span>
     </span>
   );
 }
