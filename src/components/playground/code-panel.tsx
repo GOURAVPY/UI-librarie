@@ -12,3 +12,24 @@ interface CodePanelProps {
 }
 
 type InstallMode = "cli" | "manual";
+
+export function CodePanel({
+  slug,
+  installCommand,
+  dependencies,
+  usage,
+  source,
+}: CodePanelProps) {
+  const [mode, setMode] = useState<InstallMode>("cli");
+  const manualCommand =
+    dependencies.length > 0
+      ? `npm install ${dependencies.join(" ")}`
+      : "# No packages to install";
+
+  return (
+    <div className="flex flex-col gap-4">
+      <CodeSnippet label="Usage" code={usage} />
+      <CodeSnippet label={`${slug}.tsx`} code={source} collapsible />
+    </div>
+  );
+}
