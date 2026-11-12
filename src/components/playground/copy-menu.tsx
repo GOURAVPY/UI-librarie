@@ -86,6 +86,20 @@ export function CopyMenu({
               {item.label}
             </button>
           ))}
+          <p className="mt-1 px-3 py-1 text-xs text-muted">Open in</p>
+          {links.map((link) => (
+            <a
+              key={link.label}
+              role="menuitem"
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className={ITEM_CLASS}
+            >
+              {link.label}
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+          ))}
         </div>
       ) : null}
     </div>
