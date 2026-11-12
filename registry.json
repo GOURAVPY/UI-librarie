@@ -10,6 +10,14 @@
       "description": "Reveals a line letter by letter or word by word.",
       "dependencies": ["motion"],
       "files": [{ "path": "src/registry/text-animations/split-text.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "gradient-text",
+      "type": "registry:ui",
+      "title": "Gradient Text",
+      "description": "Text filled with a slowly moving gradient.",
+      "dependencies": ["motion"],
+      "files": [{ "path": "src/registry/text-animations/gradient-text.tsx", "type": "registry:ui" }]
     }
   ]
 }
