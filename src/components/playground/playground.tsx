@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { demos, initialValues, type ControlValues } from "@/registry/demos";
+import { CustomizePanel } from "./customize-panel";
+import { ResizableStage } from "./resizable-stage";
 
 interface PlaygroundProps {
   slug: string;
@@ -35,5 +37,22 @@ export function Playground({
   if (!demo) return null;
   const usage = demo.usage(values);
 
-  return null;
+  const preview = (
+    <div>
+      <ResizableStage width={width} onWidthChange={setWidth}>
+        {/* A new key remounts the demo, which restarts its animation. */}
+        <div key={`${run}:${JSON.stringify(values)}`}>{demo.render(values)}</div>
+      </ResizableStage>
+      <CustomizePanel
+        controls={demo.controls}
+        values={values}
+        onChange={(controlName, value) =>
+          setValues((current) => ({ ...current, [controlName]: value }))
+        }
+        onReset={() => setValues(initialValues(demo.controls))}
+      />
+    </div>
+  );
+
+  return preview;
 }
