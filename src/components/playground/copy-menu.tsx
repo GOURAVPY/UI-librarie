@@ -44,5 +44,16 @@ export function CopyMenu({
     };
   }, [open]);
 
+  async function handleCopy(item: CopyMenuItem) {
+    try {
+      await navigator.clipboard.writeText(item.text);
+      setStatus(`Copied: ${item.label}`);
+    } catch {
+      // Clipboard access can be blocked by the browser; tell the user.
+      setStatus("Copy failed");
+    }
+    setOpen(false);
+  }
+
   return <div ref={rootRef} className="relative" />;
 }
