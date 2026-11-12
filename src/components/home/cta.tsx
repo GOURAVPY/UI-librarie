@@ -12,6 +12,23 @@ export function ClosingBanner() {
           Start with the components that are ready, and watch the repo for
           new ones.
         </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href="/components"
+            className="rounded-lg bg-accent px-5 py-2.5 font-medium text-accent-foreground transition-opacity hover:opacity-90"
+          >
+            Browse components
+          </Link>
+          <a
+            href={site.repoUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-lg border border-border px-5 py-2.5 font-medium transition-colors hover:bg-surface-raised"
+          >
+            View on GitHub
+            <span className="sr-only"> (opens in new tab)</span>
+          </a>
+        </div>
       </div>
     </section>
   );
