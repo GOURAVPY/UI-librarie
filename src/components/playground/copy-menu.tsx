@@ -27,5 +27,22 @@ export function CopyMenu({
   const [status, setStatus] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
 
+  // While open, close on Escape or on a press outside the menu.
+  useEffect(() => {
+    if (!open) return;
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+    function handlePointerDown(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [open]);
+
   return <div ref={rootRef} className="relative" />;
 }
