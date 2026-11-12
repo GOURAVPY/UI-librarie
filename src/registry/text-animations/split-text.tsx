@@ -35,5 +35,11 @@ export function SplitText({
     words.slice(0, index).reduce((total, pieces) => total + pieces.length, 0),
   );
 
-  return <span className={className}>{text}</span>;
+  return (
+    <span className={className}>
+      {/* Screen readers get the plain text; the animated pieces are hidden. */}
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{text}</span>
+    </span>
+  );
 }
