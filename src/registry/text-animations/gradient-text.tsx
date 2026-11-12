@@ -21,5 +21,15 @@ export function GradientText({
   className = "",
 }: GradientTextProps) {
   const reduceMotion = useReducedMotion();
-  return <span className={className}>{children}</span>;
+  return (
+    <motion.span
+      className={`inline-block bg-clip-text text-transparent ${className}`}
+      style={{
+        backgroundImage: `linear-gradient(90deg, ${colors.join(", ")})`,
+        backgroundSize: "200% 100%",
+      }}
+    >
+      {children}
+    </motion.span>
+  );
 }
