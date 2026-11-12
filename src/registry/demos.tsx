@@ -25,3 +25,11 @@ export interface RangeControl extends ControlBase {
   /** Shown after the value, for example "s" or "ms". */
   readonly unit: string;
 }
+
+export interface SelectControl extends ControlBase {
+  readonly kind: "select";
+  readonly initial: string;
+  readonly options: readonly string[];
+}
+
+export type Control = TextControl | RangeControl | SelectControl;
