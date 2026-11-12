@@ -26,12 +26,21 @@ export function CopyMenu({
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  /** Closes the panel and puts keyboard focus back on the trigger. */
+  function closeAndRefocus() {
+    setOpen(false);
+    triggerRef.current?.focus();
+  }
 
   // While open, close on Escape or on a press outside the menu.
   useEffect(() => {
     if (!open) return;
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      triggerRef.current?.focus();
     }
     function handlePointerDown(event: PointerEvent) {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
@@ -52,14 +61,14 @@ export function CopyMenu({
       // Clipboard access can be blocked by the browser; tell the user.
       setStatus("Copy failed");
     }
-    setOpen(false);
+    closeAndRefocus();
   }
 
   return (
     <div ref={rootRef} className="relative">
       <button
         type="button"
-        aria-haspopup="menu"
+        ref={triggerRef}
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
         className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium transition-colors hover:bg-surface-raised"
@@ -71,7 +80,6 @@ export function CopyMenu({
       </span>
       {open ? (
         <div
-          role="menu"
           className="absolute right-0 z-30 mt-2 w-60 rounded-xl border border-border bg-surface p-1.5 shadow-2xl shadow-black/50"
         >
           <p className="px-3 py-1 text-xs text-muted">Copy</p>
@@ -79,7 +87,6 @@ export function CopyMenu({
             <button
               key={item.label}
               type="button"
-              role="menuitem"
               onClick={() => handleCopy(item)}
               className={ITEM_CLASS}
             >
@@ -90,7 +97,6 @@ export function CopyMenu({
           {links.map((link) => (
             <a
               key={link.label}
-              role="menuitem"
               href={link.href}
               target="_blank"
               rel="noreferrer"
