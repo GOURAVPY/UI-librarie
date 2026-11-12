@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { demos, initialValues, type ControlValues } from "@/registry/demos";
 import { PreviewTabs } from "@/components/preview-tabs";
+import { site } from "@/lib/site";
 import { CodePanel } from "./code-panel";
+import { CopyMenu } from "./copy-menu";
 import { CustomizePanel } from "./customize-panel";
 import { ResizableStage } from "./resizable-stage";
 
@@ -38,6 +40,14 @@ export function Playground({
 
   if (!demo) return null;
   const usage = demo.usage(values);
+  /** A ready-made request for an AI assistant, without the full source. */
+  const prompt = `Add the ${name} component from ${site.name} to my React project.
+
+Install it with:
+${installCommand}
+
+Then use it like this:
+${usage}`;
 
   const preview = (
     <div>
@@ -79,6 +89,27 @@ export function Playground({
           </button>
         ))}
       </div>
+      {demo.playsOnce ? (
+        <button
+          type="button"
+          onClick={() => setRun((current) => current + 1)}
+          className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium transition-colors hover:bg-surface-raised"
+        >
+          Replay
+        </button>
+      ) : null}
+      <CopyMenu
+        items={[
+          { label: "Copy prompt", text: `${prompt}\n\nSource:\n${source}` },
+          { label: "Copy configured code", text: usage },
+          { label: "Copy component source", text: source },
+          { label: "Copy install command", text: installCommand },
+        ]}
+        links={[
+          { label: "Open in ChatGPT", href: `https://chatgpt.com/?q=${encodeURIComponent(prompt)}` },
+          { label: "Open in Claude", href: `https://claude.ai/new?q=${encodeURIComponent(prompt)}` },
+        ]}
+      />
     </>
   );
 
