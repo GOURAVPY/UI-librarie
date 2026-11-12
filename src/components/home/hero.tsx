@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { allEntries } from "@/lib/catalog";
+import { allEntries, installCommand } from "@/lib/catalog";
 import { site } from "@/lib/site";
 import { Window } from "./window";
 import { GradientText } from "@/registry/text-animations/gradient-text";
@@ -53,6 +53,13 @@ export function Hero() {
         <div className="grid items-start gap-4 lg:grid-cols-5">
           <Window title="hero.tsx" className="lg:col-span-3">
             <pre className="overflow-x-auto">{USAGE_CODE}</pre>
+          </Window>
+          <Window title="Terminal" className="lg:col-span-2 lg:mt-16">
+            <p className="break-all">
+              <span className="text-accent">$</span> {installCommand("split-text")}
+            </p>
+            <p className="mt-2 text-muted">✓ Added split-text.tsx</p>
+            <p className="text-muted">✓ Installed motion</p>
           </Window>
         </div>
       </div>
