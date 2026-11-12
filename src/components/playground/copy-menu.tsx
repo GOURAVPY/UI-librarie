@@ -55,5 +55,20 @@ export function CopyMenu({
     setOpen(false);
   }
 
-  return <div ref={rootRef} className="relative" />;
+  return (
+    <div ref={rootRef} className="relative">
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+        className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium transition-colors hover:bg-surface-raised"
+      >
+        Copy <span aria-hidden="true">▾</span>
+      </button>
+      <span role="status" className="sr-only">
+        {status}
+      </span>
+    </div>
+  );
 }
