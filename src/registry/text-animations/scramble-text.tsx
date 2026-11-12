@@ -28,3 +28,15 @@ function scramble(letters: string[], settled: number, characters: string): strin
     )
     .join("");
 }
+
+export function ScrambleText({
+  text,
+  speed = 40,
+  characters = DEFAULT_CHARACTERS,
+  className,
+}: ScrambleTextProps) {
+  // Starts as the real text so it is readable before JavaScript runs.
+  const [display, setDisplay] = useState(text);
+
+  return <span className={className}>{display}</span>;
+}
