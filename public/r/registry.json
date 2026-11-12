@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ui-librarie",
+  "homepage": "https://github.com/GOURAVPY/UI-librarie",
+  "items": [
+    {
+      "name": "split-text",
+      "type": "registry:ui",
+      "title": "Split Text",
+      "description": "Reveals a line letter by letter or word by word.",
+      "dependencies": ["motion"],
+      "files": [{ "path": "src/registry/text-animations/split-text.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "gradient-text",
+      "type": "registry:ui",
+      "title": "Gradient Text",
+      "description": "Text filled with a slowly moving gradient.",
+      "dependencies": ["motion"],
+      "files": [{ "path": "src/registry/text-animations/gradient-text.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "scramble-text",
+      "type": "registry:ui",
+      "title": "Scramble Text",
+      "description": "Characters shuffle before settling on the final text.",
+      "files": [{ "path": "src/registry/text-animations/scramble-text.tsx", "type": "registry:ui" }]
+    }
+  ]
+}

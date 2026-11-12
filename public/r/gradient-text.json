@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gradient-text",
+  "title": "Gradient Text",
+  "description": "Text filled with a slowly moving gradient.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "src/registry/text-animations/gradient-text.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\nimport type { ReactNode } from \"react\";\n\nconst DEFAULT_COLORS = [\"#b9f86a\", \"#5ac8fa\", \"#b9f86a\"] as const;\n\nexport interface GradientTextProps {\n  children: ReactNode;\n  /** Gradient colours, left to right. Repeat the first one last for a smooth loop. */\n  colors?: readonly string[];\n  /** Seconds for one pass of the gradient. */\n  duration?: number;\n  className?: string;\n}\n\nexport function GradientText({\n  children,\n  colors = DEFAULT_COLORS,\n  duration = 4,\n  className = \"\",\n}: GradientTextProps) {\n  const reduceMotion = useReducedMotion();\n  return (\n    <motion.span\n      className={`inline-block bg-clip-text text-transparent ${className}`}\n      style={{\n        backgroundImage: `linear-gradient(90deg, ${colors.join(\", \")})`,\n        backgroundSize: \"200% 100%\",\n      }}\n      // Sliding by one full gradient width makes the loop seamless.\n      animate={reduceMotion ? undefined : { backgroundPositionX: [\"0%\", \"-200%\"] }}\n      transition={{ duration, ease: \"linear\", repeat: Infinity }}\n    >\n      {children}\n    </motion.span>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

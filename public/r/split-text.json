@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "split-text",
+  "title": "Split Text",
+  "description": "Reveals a line letter by letter or word by word.",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "src/registry/text-animations/split-text.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\n\nconst EASE = [0.2, 0.65, 0.3, 0.9] as const;\n\nexport interface SplitTextProps {\n  /** The text to reveal. */\n  text: string;\n  /** Reveal one letter or one word at a time. */\n  by?: \"letter\" | \"word\";\n  /** Seconds between one piece and the next. */\n  stagger?: number;\n  /** Seconds each piece takes to appear. */\n  duration?: number;\n  className?: string;\n}\n\n/** Splits a word into the pieces that animate separately. */\nfunction toPieces(word: string, by: \"letter\" | \"word\"): string[] {\n  return by === \"word\" ? [word] : Array.from(word);\n}\n\nexport function SplitText({\n  text,\n  by = \"letter\",\n  stagger = 0.04,\n  duration = 0.5,\n  className,\n}: SplitTextProps) {\n  const reduceMotion = useReducedMotion();\n  const words = text.split(\" \").map((word) => toPieces(word, by));\n  // Position of each word's first piece in the whole sequence.\n  const starts = words.map((_, index) =>\n    words.slice(0, index).reduce((total, pieces) => total + pieces.length, 0),\n  );\n\n  return (\n    <span className={className}>\n      {/* Screen readers get the plain text; the animated pieces are hidden. */}\n      <span className=\"sr-only\">{text}</span>\n      <span aria-hidden=\"true\">\n        {words.map((pieces, wordIndex) => (\n          <span key={wordIndex} className=\"inline-block whitespace-nowrap\">\n            {pieces.map((piece, pieceIndex) => (\n              <motion.span\n                key={pieceIndex}\n                className=\"inline-block\"\n                initial={reduceMotion ? false : { opacity: 0, y: \"0.4em\" }}\n                animate={{ opacity: 1, y: 0 }}\n                transition={{\n                  duration,\n                  delay: (starts[wordIndex] + pieceIndex) * stagger,\n                  ease: EASE,\n                }}\n              >\n                {piece}\n              </motion.span>\n            ))}\n            {wordIndex < words.length - 1 ? \" \" : null}\n          </span>\n        ))}\n      </span>\n    </span>\n  );\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
