@@ -39,7 +39,31 @@ export function SearchBox() {
         placeholder="Search…  /"
         aria-label="Search components"
         className="w-44 rounded-md border border-border bg-surface px-3 py-1.5 text-sm placeholder:text-muted"
+        onKeyDown={(event) => {
+          if (event.key !== "Escape") return;
+          setQuery("");
+          event.currentTarget.blur();
+        }}
       />
+      {term ? (
+        <ul className="absolute right-0 z-50 mt-2 w-64 rounded-xl border border-border bg-surface p-1.5 shadow-2xl shadow-black/50">
+          {results.length === 0 ? (
+            <li className="px-3 py-2 text-sm text-muted">No components found</li>
+          ) : null}
+          {results.map(({ item, category }) => (
+            <li key={item.slug}>
+              <Link
+                href={componentHref(item.slug)}
+                onClick={() => setQuery("")}
+                className="flex items-center justify-between gap-3 rounded-md px-3 py-1.5 text-sm hover:bg-surface-raised"
+              >
+                {item.name}
+                <span className="text-xs text-muted">{category.name}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 }
