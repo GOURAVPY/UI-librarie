@@ -10,6 +10,16 @@ export function InstallSection() {
           <h2 className="text-3xl font-semibold tracking-tight">
             One command, and the code is yours.
           </h2>
+          <p className="mt-4 max-w-md text-muted">
+            The CLI copies the component&apos;s source into your project. There
+            is no wrapper library to keep up to date and nothing to lock you in.
+          </p>
+          <Link
+            href="/docs"
+            className="mt-6 inline-block rounded-lg border border-border px-5 py-2.5 font-medium transition-colors hover:bg-surface-raised"
+          >
+            Installation guide
+          </Link>
         </div>
       </div>
     </section>
