@@ -30,3 +30,26 @@ const questions = [
       "React and Tailwind CSS. The components are written in TypeScript and work in Next.js, Vite and other React setups.",
   },
 ] as const;
+
+export function Faq() {
+  return (
+    <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-20 sm:px-6 lg:grid-cols-3">
+      <h2 className="text-3xl font-semibold tracking-tight">
+        Questions, answered
+      </h2>
+      <div className="flex flex-col gap-2 lg:col-span-2">
+        {questions.map((item) => (
+          <details
+            key={item.question}
+            className="rounded-lg border border-border bg-surface px-4 py-3"
+          >
+            <summary className="cursor-pointer font-medium">
+              {item.question}
+            </summary>
+            <p className="mt-2 text-sm text-muted">{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
