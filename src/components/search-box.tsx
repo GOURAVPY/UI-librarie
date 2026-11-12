@@ -11,6 +11,24 @@ export function SearchBox() {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const term = query.trim().toLowerCase();
+  const results = term
+    ? allEntries
+        .filter((entry) => entry.item.name.toLowerCase().includes(term))
+        .slice(0, MAX_RESULTS)
+    : [];
+
+  // "/" focuses the search box from anywhere on the page.
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key !== "/" || isTyping(event.target)) return;
+      event.preventDefault();
+      inputRef.current?.focus();
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <div className="relative hidden md:block">
       <input
