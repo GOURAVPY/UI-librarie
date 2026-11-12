@@ -18,6 +18,13 @@
       "description": "Text filled with a slowly moving gradient.",
       "dependencies": ["motion"],
       "files": [{ "path": "src/registry/text-animations/gradient-text.tsx", "type": "registry:ui" }]
+    },
+    {
+      "name": "scramble-text",
+      "type": "registry:ui",
+      "title": "Scramble Text",
+      "description": "Characters shuffle before settling on the final text.",
+      "files": [{ "path": "src/registry/text-animations/scramble-text.tsx", "type": "registry:ui" }]
     }
   ]
 }
