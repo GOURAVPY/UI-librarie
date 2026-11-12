@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { allEntries, catalog, componentHref } from "@/lib/catalog";
-import { site } from "@/lib/site";
+import { Features } from "@/components/home/features";
+import { Hero } from "@/components/home/hero";
+import { Showcase } from "@/components/home/showcase";
 
 const steps = [
   {
@@ -20,33 +22,9 @@ const steps = [
 export default function HomePage() {
   return (
     <main className="flex flex-1 flex-col">
-      <section className="hero-glow border-b border-border">
-        <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-4 py-24 text-center sm:px-6 sm:py-32">
-          <p className="mb-5 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted">
-            Open source · {site.license} licence
-          </p>
-          <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-            {site.tagline}
-          </h1>
-          <p className="mt-5 max-w-2xl text-pretty text-lg text-muted">
-            {site.description}
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/components"
-              className="rounded-lg bg-accent px-5 py-2.5 font-medium text-accent-foreground transition-opacity hover:opacity-90"
-            >
-              Browse components
-            </Link>
-            <Link
-              href="/docs"
-              className="rounded-lg border border-border px-5 py-2.5 font-medium transition-colors hover:bg-surface-raised"
-            >
-              Read the docs
-            </Link>
-          </div>
-        </div>
-      </section>
+      <Hero />
+      <Features />
+      <Showcase />
 
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
         <h2 className="text-2xl font-semibold tracking-tight">How it works</h2>
