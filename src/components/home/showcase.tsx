@@ -21,6 +21,15 @@ export function Showcase() {
               <div className="preview-stage flex min-h-64 items-center justify-center overflow-hidden p-6 text-center">
                 <Preview />
               </div>
+              <div className="flex items-center justify-between gap-3 border-t border-border px-4 py-3 text-sm">
+                <Link
+                  href={componentHref(item.slug)}
+                  className="font-medium hover:text-accent"
+                >
+                  {item.name}
+                </Link>
+                <span className="text-muted">{category.name}</span>
+              </div>
             </li>
           );
         })}
