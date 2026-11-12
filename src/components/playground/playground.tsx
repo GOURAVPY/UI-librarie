@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { demos, initialValues, type ControlValues } from "@/registry/demos";
+import { PreviewTabs } from "@/components/preview-tabs";
+import { CodePanel } from "./code-panel";
 import { CustomizePanel } from "./customize-panel";
 import { ResizableStage } from "./resizable-stage";
 
@@ -54,5 +56,45 @@ export function Playground({
     </div>
   );
 
-  return preview;
+  const actions = (
+    <>
+      <div
+        role="group"
+        aria-label="Preview size"
+        className="inline-flex rounded-lg border border-border bg-surface p-1 text-xs"
+      >
+        {DEVICES.map((device) => (
+          <button
+            key={device.label}
+            type="button"
+            aria-pressed={width === device.width}
+            onClick={() => setWidth(device.width)}
+            className={
+              width === device.width
+                ? "rounded-md bg-surface-raised px-2.5 py-1 font-medium"
+                : "rounded-md px-2.5 py-1 text-muted hover:text-foreground"
+            }
+          >
+            {device.label}
+          </button>
+        ))}
+      </div>
+    </>
+  );
+
+  return (
+    <PreviewTabs
+      actions={actions}
+      preview={preview}
+      code={
+        <CodePanel
+          slug={slug}
+          installCommand={installCommand}
+          dependencies={dependencies}
+          usage={usage}
+          source={source}
+        />
+      }
+    />
+  );
 }
