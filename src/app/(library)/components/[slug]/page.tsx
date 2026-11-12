@@ -214,7 +214,12 @@ function NeighbourLink({
         direction === "Next" ? "text-right" : ""
       }`}
     >
-      <span className="block text-xs text-muted">{direction}</span>
+      <span className="block text-xs text-muted">
+        {direction}{" "}
+        <kbd className="rounded border border-border px-1 font-mono">
+          {direction === "Next" ? "]" : "["}
+        </kbd>
+      </span>
       <span className="font-medium">{entry.item.name}</span>
     </Link>
   );
