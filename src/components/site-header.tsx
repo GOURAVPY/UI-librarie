@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { mainNav, site } from "@/lib/site";
+import { SearchBox } from "./search-box";
 
 export function SiteHeader() {
   return (
@@ -13,6 +14,7 @@ export function SiteHeader() {
           {site.name}
         </Link>
         <nav aria-label="Main" className="flex items-center gap-1 text-sm">
+          <SearchBox />
           {mainNav.map((link) => (
             <Link
               key={link.href}
