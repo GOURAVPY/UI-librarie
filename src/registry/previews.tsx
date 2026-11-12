@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { GradientText } from "./text-animations/gradient-text";
+import { ScrambleText } from "./text-animations/scramble-text";
 import { SplitText } from "./text-animations/split-text";
 
 /** Wraps a preview with a button that plays its animation again. */
@@ -27,6 +28,17 @@ export function GradientTextPreview() {
     <GradientText className="text-3xl font-semibold tracking-tight sm:text-5xl">
       Colour that keeps moving
     </GradientText>
+  );
+}
+
+export function ScrambleTextPreview() {
+  return (
+    <Replayable>
+      <ScrambleText
+        text="DECODING THE MESSAGE"
+        className="font-mono text-2xl font-semibold sm:text-4xl"
+      />
+    </Replayable>
   );
 }
 
