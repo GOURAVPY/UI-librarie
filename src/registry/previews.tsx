@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { GradientText } from "./text-animations/gradient-text";
 import { SplitText } from "./text-animations/split-text";
 
 /** Wraps a preview with a button that plays its animation again. */
@@ -18,6 +19,14 @@ function Replayable({ children }: { children: ReactNode }) {
         Replay
       </button>
     </div>
+  );
+}
+
+export function GradientTextPreview() {
+  return (
+    <GradientText className="text-3xl font-semibold tracking-tight sm:text-5xl">
+      Colour that keeps moving
+    </GradientText>
   );
 }
 
