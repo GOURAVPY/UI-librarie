@@ -15,6 +15,14 @@ const features = [
     title: "Screen-reader friendly",
     body: "Animated text is hidden from assistive technology, which reads the plain text instead.",
   },
+  {
+    title: "TypeScript and Tailwind",
+    body: "Typed props with sensible defaults, styled with Tailwind classes you can override.",
+  },
+  {
+    title: "Plain MIT licence",
+    body: "Free for personal and commercial work, with no extra clauses.",
+  },
 ] as const;
 
 export function Features() {
