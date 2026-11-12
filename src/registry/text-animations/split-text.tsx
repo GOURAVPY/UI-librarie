@@ -9,4 +9,9 @@ export interface SplitTextProps {
   text: string;
   /** Reveal one letter or one word at a time. */
   by?: "letter" | "word";
+  /** Seconds between one piece and the next. */
+  stagger?: number;
+  /** Seconds each piece takes to appear. */
+  duration?: number;
+  className?: string;
 }
