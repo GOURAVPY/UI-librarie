@@ -28,6 +28,9 @@ export function GradientText({
         backgroundImage: `linear-gradient(90deg, ${colors.join(", ")})`,
         backgroundSize: "200% 100%",
       }}
+      // Sliding by one full gradient width makes the loop seamless.
+      animate={reduceMotion ? undefined : { backgroundPositionX: ["0%", "-200%"] }}
+      transition={{ duration, ease: "linear", repeat: Infinity }}
     >
       {children}
     </motion.span>
