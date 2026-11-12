@@ -13,3 +13,13 @@ export interface GradientTextProps {
   duration?: number;
   className?: string;
 }
+
+export function GradientText({
+  children,
+  colors = DEFAULT_COLORS,
+  duration = 4,
+  className = "",
+}: GradientTextProps) {
+  const reduceMotion = useReducedMotion();
+  return <span className={className}>{children}</span>;
+}
