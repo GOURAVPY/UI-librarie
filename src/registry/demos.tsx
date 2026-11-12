@@ -50,3 +50,17 @@ export function initialValues(controls: readonly Control[]): ControlValues {
     controls.map((control) => [control.name, control.initial]),
   );
 }
+
+const HEADING_CLASS = "text-3xl font-semibold tracking-tight sm:text-5xl";
+
+const splitText: Demo = {
+  playsOnce: true,
+  controls: [
+    { kind: "text", name: "text", label: "Text", initial: "Words that arrive in style" },
+    { kind: "select", name: "by", label: "Split by", initial: "letter", options: ["letter", "word"] },
+    { kind: "range", name: "stagger", label: "Stagger", initial: 0.04, min: 0.01, max: 0.2, step: 0.01, unit: "s" },
+    { kind: "range", name: "duration", label: "Duration", initial: 0.5, min: 0.1, max: 2, step: 0.1, unit: "s" },
+  ],
+  render: () => null,
+  usage: () => "",
+};
