@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { CodeBlock } from "@/components/code-block";
+import { KeyboardNav } from "@/components/keyboard-nav";
 import { Playground } from "@/components/playground/playground";
 import { PreviewTabs } from "@/components/preview-tabs";
 import { StatusBadge } from "@/components/status-badge";
@@ -48,6 +49,10 @@ async function ComponentContent({ params }: Pick<Props, "params">) {
   const { item, category } = entry;
   const { previous, next } = neighbours(slug);
   const built = registry[slug];
+  /** Other components in the same category. */
+  const related = category.items
+    .filter((other) => other.slug !== slug)
+    .slice(0, 3);
   const code = built
     ? await readRegistrySource(built.file)
     : `// The source for ${item.name} will appear here once it is built.`;
@@ -110,6 +115,31 @@ async function ComponentContent({ params }: Pick<Props, "params">) {
         <PropsTable item={item} />
       </section>
 
+      {related.length > 0 ? (
+        <section className="mt-10">
+          <h2 className="text-xl font-semibold tracking-tight">
+            Related components
+          </h2>
+          <ul className="mt-3 grid gap-2 sm:grid-cols-3">
+            {related.map((other) => (
+              <li key={other.slug}>
+                <Link
+                  href={componentHref(other.slug)}
+                  className="flex items-center justify-between rounded-lg border border-border bg-surface px-4 py-3 text-sm font-medium transition-colors hover:border-muted"
+                >
+                  {other.name}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      <KeyboardNav
+        previousHref={previous ? componentHref(previous.item.slug) : undefined}
+        nextHref={next ? componentHref(next.item.slug) : undefined}
+      />
       <nav
         aria-label="Other components"
         className="mt-12 flex items-stretch justify-between gap-4 border-t border-border pt-6"
