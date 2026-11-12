@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { SplitText } from "./text-animations/split-text";
 
 /** Wraps a preview with a button that plays its animation again. */
 function Replayable({ children }: { children: ReactNode }) {
@@ -17,5 +18,16 @@ function Replayable({ children }: { children: ReactNode }) {
         Replay
       </button>
     </div>
+  );
+}
+
+export function SplitTextPreview() {
+  return (
+    <Replayable>
+      <SplitText
+        text="Words that arrive in style"
+        className="text-3xl font-semibold tracking-tight sm:text-5xl"
+      />
+    </Replayable>
   );
 }
