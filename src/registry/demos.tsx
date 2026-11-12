@@ -97,7 +97,7 @@ const gradientText: Demo = {
   usage: (values) => `import { GradientText } from "@/components/ui/gradient-text";
 
 <GradientText duration={${values.duration}}>
-  ${values.text}
+  {${JSON.stringify(values.text)}}
 </GradientText>`,
 };
 
