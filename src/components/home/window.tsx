@@ -10,5 +10,13 @@ export function Window({
   children: ReactNode;
   className?: string;
 }) {
-  return <div className={className}>{children}</div>;
+  return (
+    <div
+      className={`overflow-hidden rounded-xl border border-border bg-surface-raised/90 shadow-2xl shadow-black/50 backdrop-blur ${className}`}
+    >
+      <div className="p-4 font-mono text-xs leading-relaxed sm:text-sm">
+        {children}
+      </div>
+    </div>
+  );
 }
