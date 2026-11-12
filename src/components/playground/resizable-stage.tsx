@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 
 const MIN_WIDTH = 280;
 /** Pixels the width changes per arrow-key press. */
@@ -18,9 +18,19 @@ export function ResizableStage({
   onWidthChange,
   children,
 }: ResizableStageProps) {
+  const trackRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="preview-stage relative overflow-hidden rounded-lg border border-border">
-      {children}
+    <div
+      ref={trackRef}
+      className="preview-stage relative overflow-hidden rounded-lg border border-border"
+    >
+      <div
+        style={{ width: width ?? "100%" }}
+        className="relative flex min-h-80 max-w-full items-center justify-center border-r border-border bg-background p-6 pr-8 text-center"
+      >
+        {children}
+      </div>
     </div>
   );
 }
