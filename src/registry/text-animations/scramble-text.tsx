@@ -19,3 +19,12 @@ export interface ScrambleTextProps {
 function randomCharacter(characters: string): string {
   return characters[Math.floor(Math.random() * characters.length)] ?? "";
 }
+
+/** Keeps the first `settled` characters and shuffles the rest. Spaces stay. */
+function scramble(letters: string[], settled: number, characters: string): string {
+  return letters
+    .map((letter, index) =>
+      index < settled || letter === " " ? letter : randomCharacter(characters),
+    )
+    .join("");
+}
