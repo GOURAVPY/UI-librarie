@@ -48,6 +48,11 @@ export function SplitText({
                 className="inline-block"
                 initial={reduceMotion ? false : { opacity: 0, y: "0.4em" }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration,
+                  delay: (starts[wordIndex] + pieceIndex) * stagger,
+                  ease: EASE,
+                }}
               >
                 {piece}
               </motion.span>
