@@ -15,3 +15,7 @@ export interface ScrambleTextProps {
   characters?: string;
   className?: string;
 }
+
+function randomCharacter(characters: string): string {
+  return characters[Math.floor(Math.random() * characters.length)] ?? "";
+}
