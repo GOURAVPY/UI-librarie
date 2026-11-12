@@ -69,6 +69,25 @@ export function CopyMenu({
       <span role="status" className="sr-only">
         {status}
       </span>
+      {open ? (
+        <div
+          role="menu"
+          className="absolute right-0 z-30 mt-2 w-60 rounded-xl border border-border bg-surface p-1.5 shadow-2xl shadow-black/50"
+        >
+          <p className="px-3 py-1 text-xs text-muted">Copy</p>
+          {items.map((item) => (
+            <button
+              key={item.label}
+              type="button"
+              role="menuitem"
+              onClick={() => handleCopy(item)}
+              className={ITEM_CLASS}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
