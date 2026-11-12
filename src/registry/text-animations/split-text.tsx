@@ -42,7 +42,16 @@ export function SplitText({
       <span aria-hidden="true">
         {words.map((pieces, wordIndex) => (
           <span key={wordIndex} className="inline-block whitespace-nowrap">
-            {pieces.join("")}
+            {pieces.map((piece, pieceIndex) => (
+              <motion.span
+                key={pieceIndex}
+                className="inline-block"
+                initial={reduceMotion ? false : { opacity: 0, y: "0.4em" }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                {piece}
+              </motion.span>
+            ))}
             {wordIndex < words.length - 1 ? " " : null}
           </span>
         ))}
