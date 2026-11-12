@@ -84,6 +84,15 @@ export const catalog: readonly CatalogCategory[] = [
   },
 ];
 
+function ready(
+  slug: string,
+  name: string,
+  description: string,
+  props: readonly CatalogProp[],
+): CatalogItem {
+  return { slug, name, description, status: "ready", props };
+}
+
 function planned(slug: string, name: string, description: string): CatalogItem {
   return { slug, name, description, status: "planned", props: [] };
 }
