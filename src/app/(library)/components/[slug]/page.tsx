@@ -14,6 +14,8 @@ import {
   type CatalogEntry,
   type CatalogItem,
 } from "@/lib/catalog";
+import { readRegistrySource } from "@/lib/source";
+import { registry } from "@/registry";
 
 type Props = PageProps<"/components/[slug]">;
 
@@ -44,6 +46,11 @@ async function ComponentContent({ params }: Pick<Props, "params">) {
 
   const { item, category } = entry;
   const { previous, next } = neighbours(slug);
+  const built = registry[slug];
+  const Preview = built?.Preview;
+  const code = built
+    ? await readRegistrySource(built.file)
+    : `// The source for ${item.name} will appear here once it is built.`;
 
   return (
     <article>
