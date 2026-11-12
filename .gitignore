@@ -40,5 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# generated shadcn registry
+/public/r/
+
 # claude local settings
 .claude/settings.local.json
