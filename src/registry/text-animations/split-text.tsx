@@ -15,3 +15,8 @@ export interface SplitTextProps {
   duration?: number;
   className?: string;
 }
+
+/** Splits a word into the pieces that animate separately. */
+function toPieces(word: string, by: "letter" | "word"): string[] {
+  return by === "word" ? [word] : Array.from(word);
+}
