@@ -62,6 +62,13 @@ export function SiteFooter() {
           View the source on GitHub
         </a>
       </div>
+      {/* Decorative oversized wordmark that fades into the page. */}
+      <p
+        aria-hidden="true"
+        className="pointer-events-none -mb-[0.28em] select-none bg-gradient-to-b from-border to-transparent bg-clip-text text-center text-[18vw] font-semibold leading-none tracking-tighter text-transparent"
+      >
+        {site.name}
+      </p>
     </footer>
   );
 }
