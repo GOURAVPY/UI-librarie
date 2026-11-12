@@ -50,6 +50,16 @@ export function CodePanel({
             </button>
           ))}
         </div>
+        <CodeSnippet
+          label="Install"
+          code={mode === "cli" ? installCommand : manualCommand}
+        />
+        {mode === "manual" ? (
+          <p className="mt-2 text-sm text-muted">
+            Then copy the source below into{" "}
+            <code className="font-mono">components/ui/{slug}.tsx</code>.
+          </p>
+        ) : null}
       </div>
       <CodeSnippet label="Usage" code={usage} />
       <CodeSnippet label={`${slug}.tsx`} code={source} collapsible />
