@@ -12,7 +12,7 @@ const labels: Record<CopyState, string> = {
   failed: "Copy failed",
 };
 
-export function CopyButton({ text }: { text: string }) {
+export function CopyButton({ text, label }: { text: string; label: string }) {
   const [state, setState] = useState<CopyState>("idle");
 
   useEffect(() => {
@@ -32,12 +32,18 @@ export function CopyButton({ text }: { text: string }) {
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleCopy}
-      className="shrink-0 rounded-md border border-border bg-surface-raised px-2.5 py-1 text-xs text-muted transition-colors hover:text-foreground"
-    >
-      <span aria-live="polite">{labels[state]}</span>
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={handleCopy}
+        aria-label={`Copy ${label}`}
+        className="shrink-0 rounded-md border border-border bg-surface-raised px-2.5 py-1 text-xs text-muted transition-colors hover:text-foreground"
+      >
+        {labels[state]}
+      </button>
+      <span role="status" className="sr-only">
+        {state === "idle" ? "" : `${label}: ${labels[state]}`}
+      </span>
+    </>
   );
 }

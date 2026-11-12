@@ -9,6 +9,15 @@ const tabs: readonly { key: TabKey; label: string }[] = [
   { key: "code", label: "Code" },
 ];
 
+function nextTab(key: string, active: TabKey): TabKey | undefined {
+  if (key === "Home") return "preview";
+  if (key === "End") return "code";
+  if (key === "ArrowRight" || key === "ArrowLeft") {
+    return active === "preview" ? "code" : "preview";
+  }
+  return undefined;
+}
+
 export function PreviewTabs({
   preview,
   code,
@@ -20,9 +29,9 @@ export function PreviewTabs({
   const baseId = useId();
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    const next = nextTab(event.key, active);
+    if (!next) return;
     event.preventDefault();
-    const next: TabKey = active === "preview" ? "code" : "preview";
     setActive(next);
     document.getElementById(`${baseId}-tab-${next}`)?.focus();
   }
@@ -61,6 +70,7 @@ export function PreviewTabs({
       <div
         id={`${baseId}-panel-preview`}
         role="tabpanel"
+        tabIndex={0}
         aria-labelledby={`${baseId}-tab-preview`}
         hidden={active !== "preview"}
       >
@@ -69,6 +79,7 @@ export function PreviewTabs({
       <div
         id={`${baseId}-panel-code`}
         role="tabpanel"
+        tabIndex={0}
         aria-labelledby={`${baseId}-tab-code`}
         hidden={active !== "code"}
       >

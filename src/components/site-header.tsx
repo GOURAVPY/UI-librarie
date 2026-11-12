@@ -29,6 +29,7 @@ export function SiteHeader() {
             className="ml-1 rounded-md border border-border px-3 py-1.5 text-foreground transition-colors hover:bg-surface-raised"
           >
             GitHub
+            <span className="sr-only"> (opens in new tab)</span>
           </a>
         </nav>
       </div>

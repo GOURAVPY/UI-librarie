@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { CodeBlock } from "@/components/code-block";
 import { PreviewTabs } from "@/components/preview-tabs";
 import { StatusBadge } from "@/components/status-badge";
@@ -27,7 +28,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: entry.item.name, description: entry.item.description };
 }
 
-export default async function ComponentPage({ params }: Props) {
+export default function ComponentPage({ params }: Props) {
+  // Next.js requires URL data to be read inside a Suspense boundary.
+  return (
+    <Suspense fallback={null}>
+      <ComponentContent params={params} />
+    </Suspense>
+  );
+}
+
+async function ComponentContent({ params }: Pick<Props, "params">) {
   const { slug } = await params;
   const entry = findEntry(slug);
   if (!entry) notFound();

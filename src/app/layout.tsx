@@ -34,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <SiteHeader />
-        <div id="main" className="flex flex-1 flex-col">
+        <div id="main" tabIndex={-1} className="flex flex-1 flex-col">
           {children}
         </div>
         <SiteFooter />
