@@ -78,7 +78,25 @@ async function ComponentContent({ params }: Pick<Props, "params">) {
         )}
       </div>
 
-      <section className="mt-10">
+      {built ? (
+        <section className="mt-10">
+          <h2 className="text-xl font-semibold tracking-tight">Dependencies</h2>
+          {built.dependencies.length > 0 ? (
+            <div className="mt-3">
+              <CodeBlock
+                label={`${built.dependencies.length} required package`}
+                code={`npm install ${built.dependencies.join(" ")}`}
+              />
+            </div>
+          ) : (
+            <p className="mt-3 rounded-lg border border-dashed border-border p-4 text-sm text-muted">
+              None. This component only needs React and Tailwind CSS.
+            </p>
+          )}
+        </section>
+      ) : null}
+
+      <section className={built ? "hidden" : "mt-10"}>
         <h2 className="text-xl font-semibold tracking-tight">Install</h2>
         <p className="mt-1 mb-3 text-sm text-muted">
           Run this in a project that uses shadcn/ui. The command will work once
