@@ -19,4 +19,14 @@ const questions = [
     question: "Can I use it in commercial projects?",
     answer: `Yes. It is released under the ${site.license} licence, with no extra clauses.`,
   },
+  {
+    question: "Do I need to install a package?",
+    answer:
+      "Not for the library itself. Some components use the Motion animation library, which the CLI installs for you.",
+  },
+  {
+    question: "What does my project need?",
+    answer:
+      "React and Tailwind CSS. The components are written in TypeScript and work in Next.js, Vite and other React setups.",
+  },
 ] as const;
