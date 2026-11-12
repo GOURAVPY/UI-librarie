@@ -2,6 +2,10 @@ import Link from "next/link";
 import { installCommand } from "@/lib/catalog";
 import { Window } from "./window";
 
+const USAGE_CODE = `import { ScrambleText } from "@/components/ui/scramble-text";
+
+<ScrambleText text="ACCESS GRANTED" speed={40} />`;
+
 export function InstallSection() {
   return (
     <section className="border-y border-border bg-surface/40">
@@ -28,6 +32,9 @@ export function InstallSection() {
               {installCommand("scramble-text")}
             </p>
             <p className="mt-2 text-muted">✓ Added scramble-text.tsx</p>
+          </Window>
+          <Window title="page.tsx" className="sm:ml-10">
+            <pre className="overflow-x-auto">{USAGE_CODE}</pre>
           </Window>
         </div>
       </div>
