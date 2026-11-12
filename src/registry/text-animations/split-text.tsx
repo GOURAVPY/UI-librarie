@@ -28,5 +28,12 @@ export function SplitText({
   duration = 0.5,
   className,
 }: SplitTextProps) {
+  const reduceMotion = useReducedMotion();
+  const words = text.split(" ").map((word) => toPieces(word, by));
+  // Position of each word's first piece in the whole sequence.
+  const starts = words.map((_, index) =>
+    words.slice(0, index).reduce((total, pieces) => total + pieces.length, 0),
+  );
+
   return <span className={className}>{text}</span>;
 }
