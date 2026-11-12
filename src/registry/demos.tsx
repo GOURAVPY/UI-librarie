@@ -33,3 +33,20 @@ export interface SelectControl extends ControlBase {
 }
 
 export type Control = TextControl | RangeControl | SelectControl;
+
+export interface Demo {
+  readonly controls: readonly Control[];
+  /** True when the animation plays once, so the preview needs a Replay button. */
+  readonly playsOnce: boolean;
+  /** Renders the component with the current control values. */
+  readonly render: (values: ControlValues) => ReactNode;
+  /** The usage snippet for the current control values. */
+  readonly usage: (values: ControlValues) => string;
+}
+
+/** Starting values for a demo's controls. */
+export function initialValues(controls: readonly Control[]): ControlValues {
+  return Object.fromEntries(
+    controls.map((control) => [control.name, control.initial]),
+  );
+}
