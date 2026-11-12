@@ -35,7 +35,13 @@ export const catalog: readonly CatalogCategory[] = [
     name: "Text Animations",
     description: "Headlines and copy that reveal, shift and react.",
     items: [
-      planned("split-text", "Split Text", "Reveals a line letter by letter or word by word."),
+      ready("split-text", "Split Text", "Reveals a line letter by letter or word by word.", [
+        { name: "text", type: "string", defaultValue: "required", description: "The text to reveal." },
+        { name: "by", type: '"letter" | "word"', defaultValue: '"letter"', description: "Reveal one letter or one word at a time." },
+        { name: "stagger", type: "number", defaultValue: "0.04", description: "Seconds between one piece and the next." },
+        { name: "duration", type: "number", defaultValue: "0.5", description: "Seconds each piece takes to appear." },
+        { name: "className", type: "string", defaultValue: "none", description: "Classes for the wrapper." },
+      ]),
       planned("gradient-text", "Gradient Text", "Text filled with a slowly moving gradient."),
       planned("scramble-text", "Scramble Text", "Characters shuffle before settling on the final text."),
     ],
