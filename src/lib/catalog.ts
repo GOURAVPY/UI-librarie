@@ -48,7 +48,12 @@ export const catalog: readonly CatalogCategory[] = [
         { name: "duration", type: "number", defaultValue: "4", description: "Seconds for one pass of the gradient." },
         { name: "className", type: "string", defaultValue: '""', description: "Classes for the text." },
       ]),
-      planned("scramble-text", "Scramble Text", "Characters shuffle before settling on the final text."),
+      ready("scramble-text", "Scramble Text", "Characters shuffle before settling on the final text.", [
+        { name: "text", type: "string", defaultValue: "required", description: "The text to settle on." },
+        { name: "speed", type: "number", defaultValue: "40", description: "Milliseconds between shuffles." },
+        { name: "characters", type: "string", defaultValue: "A–Z and 0–9", description: "The characters to shuffle through." },
+        { name: "className", type: "string", defaultValue: "none", description: "Classes for the wrapper." },
+      ]),
     ],
   },
   {
