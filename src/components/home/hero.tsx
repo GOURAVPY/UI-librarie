@@ -20,6 +20,23 @@ export function Hero() {
       <p className="mt-5 max-w-xl text-pretty text-lg text-muted">
         {site.description}
       </p>
+      <div className="mt-8 flex flex-wrap items-center gap-3">
+        <Link
+          href="/components"
+          className="rounded-lg bg-accent px-5 py-2.5 font-medium text-accent-foreground transition-opacity hover:opacity-90"
+        >
+          Browse components
+        </Link>
+        <a
+          href={site.repoUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-lg border border-border px-5 py-2.5 font-medium transition-colors hover:bg-surface-raised"
+        >
+          Star on GitHub
+          <span className="sr-only"> (opens in new tab)</span>
+        </a>
+      </div>
     </section>
   );
 }
