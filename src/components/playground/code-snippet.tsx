@@ -40,6 +40,17 @@ export function CodeSnippet({
             ))}
           </code>
         </pre>
+        {expanded ? null : (
+          <div className="absolute inset-x-0 bottom-0 flex justify-end bg-gradient-to-t from-surface to-transparent p-3 pt-16">
+            <button
+              type="button"
+              onClick={() => setExpanded(true)}
+              className="rounded-md border border-border bg-surface-raised px-3 py-1.5 text-xs font-medium hover:bg-background"
+            >
+              Expand snippet
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
