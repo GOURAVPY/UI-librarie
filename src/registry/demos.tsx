@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { SplitText } from "./text-animations/split-text";
 
 export type ControlValue = string | number;
 export type ControlValues = Readonly<Record<string, ControlValue>>;
@@ -61,6 +62,21 @@ const splitText: Demo = {
     { kind: "range", name: "stagger", label: "Stagger", initial: 0.04, min: 0.01, max: 0.2, step: 0.01, unit: "s" },
     { kind: "range", name: "duration", label: "Duration", initial: 0.5, min: 0.1, max: 2, step: 0.1, unit: "s" },
   ],
-  render: () => null,
-  usage: () => "",
+  render: (values) => (
+    <SplitText
+      text={String(values.text)}
+      by={values.by === "word" ? "word" : "letter"}
+      stagger={Number(values.stagger)}
+      duration={Number(values.duration)}
+      className={HEADING_CLASS}
+    />
+  ),
+  usage: (values) => `import { SplitText } from "@/components/ui/split-text";
+
+<SplitText
+  text=${JSON.stringify(values.text)}
+  by="${values.by}"
+  stagger={${values.stagger}}
+  duration={${values.duration}}
+/>`,
 };
