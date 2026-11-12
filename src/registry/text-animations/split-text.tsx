@@ -46,11 +46,14 @@ export function SplitText({
               <motion.span
                 key={pieceIndex}
                 className="inline-block"
-                initial={reduceMotion ? false : { opacity: 0, y: "0.4em" }}
+                initial={{ opacity: 0, y: "0.4em" }}
                 animate={{ opacity: 1, y: 0 }}
+                // With reduced motion every piece appears at once, unanimated.
                 transition={{
-                  duration,
-                  delay: (starts[wordIndex] + pieceIndex) * stagger,
+                  duration: reduceMotion ? 0 : duration,
+                  delay: reduceMotion
+                    ? 0
+                    : (starts[wordIndex] + pieceIndex) * stagger,
                   ease: EASE,
                 }}
               >
