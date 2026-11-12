@@ -42,7 +42,12 @@ export const catalog: readonly CatalogCategory[] = [
         { name: "duration", type: "number", defaultValue: "0.5", description: "Seconds each piece takes to appear." },
         { name: "className", type: "string", defaultValue: "none", description: "Classes for the wrapper." },
       ]),
-      planned("gradient-text", "Gradient Text", "Text filled with a slowly moving gradient."),
+      ready("gradient-text", "Gradient Text", "Text filled with a slowly moving gradient.", [
+        { name: "children", type: "ReactNode", defaultValue: "required", description: "The text to colour." },
+        { name: "colors", type: "string[]", defaultValue: "green, blue, green", description: "Gradient colours, left to right. Repeat the first one last for a smooth loop." },
+        { name: "duration", type: "number", defaultValue: "4", description: "Seconds for one pass of the gradient." },
+        { name: "className", type: "string", defaultValue: '""', description: "Classes for the text." },
+      ]),
       planned("scramble-text", "Scramble Text", "Characters shuffle before settling on the final text."),
     ],
   },
