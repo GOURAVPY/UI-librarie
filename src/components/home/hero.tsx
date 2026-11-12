@@ -1,11 +1,22 @@
 import Link from "next/link";
 import { allEntries } from "@/lib/catalog";
 import { site } from "@/lib/site";
+import { Window } from "./window";
 import { GradientText } from "@/registry/text-animations/gradient-text";
 
 const readyCount = allEntries.filter(
   (entry) => entry.item.status === "ready",
 ).length;
+
+const USAGE_CODE = `import { SplitText } from "@/components/ui/split-text";
+
+export default function Hero() {
+  return (
+    <h1>
+      <SplitText text="Hello, motion" by="word" />
+    </h1>
+  );
+}`;
 
 export function Hero() {
   return (
@@ -36,6 +47,14 @@ export function Hero() {
           Star on GitHub
           <span className="sr-only"> (opens in new tab)</span>
         </a>
+      </div>
+
+      <div className="hero-glow preview-stage relative mt-12 overflow-hidden rounded-2xl border border-border p-4 sm:p-10">
+        <div className="grid items-start gap-4 lg:grid-cols-5">
+          <Window title="hero.tsx" className="lg:col-span-3">
+            <pre className="overflow-x-auto">{USAGE_CODE}</pre>
+          </Window>
+        </div>
       </div>
     </section>
   );
