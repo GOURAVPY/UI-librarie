@@ -2,21 +2,26 @@
 
 import { useState } from "react";
 import { CopyButton } from "@/components/copy-button";
+import { HighlightedLine } from "@/components/highlighted-line";
+import { highlight, type Language } from "@/lib/highlight";
 
 interface CodeSnippetProps {
   label: string;
   code: string;
   /** Starts collapsed with an "Expand snippet" button. For long files. */
   collapsible?: boolean;
+  /** Which colouring rules to use. */
+  language?: Language;
 }
 
 export function CodeSnippet({
   label,
   code,
   collapsible = false,
+  language = "tsx",
 }: CodeSnippetProps) {
   const [expanded, setExpanded] = useState(!collapsible);
-  const lines = code.replace(/\n$/, "").split("\n");
+  const lines = highlight(code.replace(/\n$/, ""), language);
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-surface">
@@ -35,7 +40,7 @@ export function CodeSnippet({
                 >
                   {index + 1}
                 </span>
-                {line}
+                <HighlightedLine tokens={line} />
               </span>
             ))}
           </code>
