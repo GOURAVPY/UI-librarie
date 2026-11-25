@@ -29,8 +29,9 @@ const TSX_PATTERN = new RegExp(
     STRING,
     String.raw`(?<keyword>\b(?:${KEYWORDS.join("|")})\b)`,
     String.raw`(?<number>\b\d+(?:\.\d+)?\b)`,
-    // A name directly after "<" or "</": a JSX tag or component.
-    String.raw`(?<tag>(?<=<\/?)[A-Za-z][\w.]*)`,
+    // A name after "</", or after a "<" that does not follow an identifier
+    // (which would be a type argument such as useState<T>): a JSX tag.
+    String.raw`(?<tag>(?<=<\/)[A-Za-z][\w.]*|(?<=(?<![\w$)\]])<)[A-Za-z][\w.]*)`,
   ].join("|"),
   "g",
 );
