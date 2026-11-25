@@ -51,3 +51,15 @@ const KINDS = ["comment", "string", "keyword", "number", "tag"] as const;
 function kindOf(groups: Record<string, string | undefined> = {}): TokenKind {
   return KINDS.find((kind) => groups[kind] !== undefined) ?? "plain";
 }
+
+/** Splits tokens at line breaks, so each line can be rendered on its own. */
+function toLines(tokens: readonly Token[]): Token[][] {
+  const lines: Token[][] = [[]];
+  for (const token of tokens) {
+    token.text.split("\n").forEach((part, index) => {
+      if (index > 0) lines.push([]);
+      if (part) lines[lines.length - 1].push({ text: part, kind: token.kind });
+    });
+  }
+  return lines;
+}
