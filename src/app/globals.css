@@ -27,6 +27,11 @@
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-code-comment: var(--code-comment);
+  --color-code-string: var(--code-string);
+  --color-code-keyword: var(--code-keyword);
+  --color-code-number: var(--code-number);
+  --color-code-tag: var(--code-tag);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
