@@ -23,7 +23,8 @@ export function CodeBlock({
       <pre className="overflow-x-auto p-4 font-mono text-sm leading-relaxed">
         <code>
           {lines.map((line, index) => (
-            <span key={index} className="block">
+            // min-h keeps blank lines from collapsing to nothing.
+            <span key={index} className="block min-h-[1lh]">
               <HighlightedLine tokens={line} />
             </span>
           ))}
