@@ -34,3 +34,20 @@ const TSX_PATTERN = new RegExp(
   ].join("|"),
   "g",
 );
+
+const BASH_PATTERN = new RegExp(
+  [
+    String.raw`(?<comment>#[^\n]*)`,
+    STRING,
+    // The command at the start of a line, such as npx or npm.
+    String.raw`(?<keyword>^[a-z][\w-]*)`,
+  ].join("|"),
+  "gm",
+);
+
+const KINDS = ["comment", "string", "keyword", "number", "tag"] as const;
+
+/** Finds which named group produced a match. */
+function kindOf(groups: Record<string, string | undefined> = {}): TokenKind {
+  return KINDS.find((kind) => groups[kind] !== undefined) ?? "plain";
+}
