@@ -63,3 +63,19 @@ function toLines(tokens: readonly Token[]): Token[][] {
   }
   return lines;
 }
+
+/** Tokenizes code for colouring. Returns one list of tokens per line. */
+export function highlight(code: string, language: Language): Token[][] {
+  const pattern = language === "bash" ? BASH_PATTERN : TSX_PATTERN;
+  const tokens: Token[] = [];
+  let end = 0;
+  for (const match of code.matchAll(pattern)) {
+    if (match.index > end) {
+      tokens.push({ text: code.slice(end, match.index), kind: "plain" });
+    }
+    tokens.push({ text: match[0], kind: kindOf(match.groups) });
+    end = match.index + match[0].length;
+  }
+  if (end < code.length) tokens.push({ text: code.slice(end), kind: "plain" });
+  return toLines(tokens);
+}
