@@ -27,7 +27,8 @@ const TSX_PATTERN = new RegExp(
   [
     String.raw`(?<comment>\/\/[^\n]*|\/\*[\s\S]*?\*\/)`,
     STRING,
-    String.raw`(?<keyword>\b(?:${KEYWORDS.join("|")})\b)`,
+    // Not after "." so property names such as item.type stay plain.
+    String.raw`(?<keyword>(?<![.\w$])(?:${KEYWORDS.join("|")})\b)`,
     String.raw`(?<number>\b\d+(?:\.\d+)?\b)`,
     // A name after "</", or after a "<" that does not follow an identifier
     // (which would be a type argument such as useState<T>): a JSX tag.
