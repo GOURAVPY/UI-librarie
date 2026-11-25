@@ -10,6 +10,12 @@
   --muted: #a1a1aa;
   --accent: #b9f86a;
   --accent-foreground: #0b1300;
+  /* Syntax colours for code blocks */
+  --code-comment: #71717a;
+  --code-string: #b9f86a;
+  --code-keyword: #c4a5ff;
+  --code-number: #f5a86a;
+  --code-tag: #5ac8fa;
 }
 
 @theme inline {
