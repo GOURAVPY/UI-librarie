@@ -12,3 +12,9 @@ export interface Token {
 }
 
 export type Language = "tsx" | "bash";
+
+const KEYWORDS = [
+  "import", "export", "from", "default", "const", "let", "function", "return",
+  "if", "else", "type", "interface", "extends", "as", "new", "async", "await",
+  "typeof", "readonly", "null", "undefined", "true", "false",
+];
