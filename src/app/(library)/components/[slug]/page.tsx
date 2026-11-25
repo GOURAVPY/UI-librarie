@@ -80,7 +80,13 @@ async function ComponentContent({ params }: Pick<Props, "params">) {
         ) : (
           <PreviewTabs
             preview={<PreviewPlaceholder item={item} />}
-            code={<CodeBlock label={`${item.slug}.tsx`} code={code} />}
+            code={
+              <CodeBlock
+                label={`${item.slug}.tsx`}
+                code={code}
+                language="tsx"
+              />
+            }
           />
         )}
       </div>
