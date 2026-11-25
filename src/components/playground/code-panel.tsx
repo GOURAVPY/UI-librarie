@@ -52,6 +52,7 @@ export function CodePanel({
         </div>
         <CodeSnippet
           label="Install"
+          language="bash"
           code={mode === "cli" ? installCommand : manualCommand}
         />
         {mode === "manual" ? (
